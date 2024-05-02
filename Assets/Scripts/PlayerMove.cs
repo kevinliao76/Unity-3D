@@ -1,35 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed;
-    public KeyCode jumpKey = KeyCode.Space;
-
     public float jumpForce;
     public float jumpCooldown;
-
+    public float groundDrag;
+    
+    public KeyCode jumpKey = KeyCode.Space;
+    
     public Transform PlayerCamera;
+
+    public float playerHeight;       
+    public LayerMask whatIsGround;   
+    public bool grounded;
 
     private bool readyToJump;
     private float horizontalInput;   
     private float verticalInput;  
     
     private Vector3 moveDirection;
+
     private Rigidbody rbFirstPerson;
     // Start is called before the first frame update
     void Start()
     {
         rbFirstPerson = GetComponent<Rigidbody>();
         rbFirstPerson.freezeRotation = true;
+        readyToJump = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         MyInput();
-        SpeedControl(); 
+        SpeedControl();
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+        Debug.DrawRay(transform.position, new Vector3(0, -(playerHeight * 0.5f + 0.3f), 0), Color.red);
+        if (grounded)
+            rbFirstPerson.drag = groundDrag;
+        else
+            rbFirstPerson.drag = 0;
     }
 
     private void FixedUpdate()
@@ -53,7 +67,8 @@ public class PlayerMove : MonoBehaviour
     private void MovePlayer()
     {
         moveDirection = PlayerCamera.forward * verticalInput + PlayerCamera.right * horizontalInput;
-        rbFirstPerson.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        if (grounded)
+            rbFirstPerson.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
     }
     private void SpeedControl()
     {
