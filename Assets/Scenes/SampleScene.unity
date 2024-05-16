@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 509145087}
   - component: {fileID: 509145086}
   - component: {fileID: 509145085}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Plane
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ Transform:
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: -1.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 762762835}
   m_Layer: 0
   m_Name: PlayerObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -375,12 +375,13 @@ MonoBehaviour:
   jumpForce: 10
   jumpCooldown: 1
   groundDrag: 1
+  airMultiplier: 0
   jumpKey: 32
   PlayerCamera: {fileID: 963194228}
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2
   grounded: 1
 --- !u!54 &762762836
 Rigidbody:
@@ -526,10 +527,10 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
+  m_Name: PlayerCamera
+  m_TagString: PlayrCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -575,7 +576,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -608,7 +609,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 810711638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
+--- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -617,11 +618,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe0dfa3e62ed07340bd55a1f920f6298, type: 3}
+  m_Script: {fileID: 11500000, guid: 163b72711e08c0643b7a349c34ce5cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 1
-  sensY: 1
+  sensX: 5
+  sensY: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

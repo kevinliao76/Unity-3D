@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCam : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
     [Header("鏡頭轉動敏感度")]
     public float sensX;   // 鏡頭X軸轉動敏感度
